@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { MinimalHomeLink } from "@/components/layout/MinimalHomeLink";
 import { Reveal } from "@/components/ui/Reveal";
+import { siteContact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -8,150 +9,124 @@ export const metadata: Metadata = {
     "Start a conversation about your next commission or collaboration.",
 };
 
+const fieldClass =
+  "mt-1 w-full border-b border-line bg-transparent py-1.5 text-[15px] text-foreground outline-none focus:border-foreground";
+
 export default function ContactPage() {
   return (
-    <div className="min-h-screen">
-      <div className="px-6 pt-8 md:px-12 lg:px-20">
-        <MinimalHomeLink />
-      </div>
-      <section className="section-pad pb-8 pt-6 text-center">
-        <Reveal>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-[48px]">
-            Contact
-          </h1>
-          <p className="mx-auto mt-4 max-w-md text-[17px] leading-relaxed text-secondary">
-            Share a brief overview of your project. We typically respond within
-            three business days.
-          </p>
-        </Reveal>
-      </section>
+    <div className="flex min-h-[calc(100dvh-4.5rem)] flex-col px-6 pb-6 pt-6 md:px-12 lg:px-20">
+      <MinimalHomeLink />
 
-      <section className="section-pad border-t border-line pt-12">
-        <div className="container-wide grid gap-16 lg:grid-cols-2 lg:gap-20">
-          <Reveal>
-            <div className="space-y-8">
+      <div className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center py-4 md:py-6">
+        <Reveal>
+          <div className="mb-5 text-center md:mb-6">
+            <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-[40px]">
+              Contact
+            </h1>
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-secondary md:text-[15px]">
+              Share a brief overview of your project. I typically respond
+              within three business days.
+            </p>
+          </div>
+
+          <form
+            className="glass rounded-[18px] p-5 md:p-6"
+            action={`mailto:${siteContact.email}`}
+            method="POST"
+            encType="text/plain"
+          >
+            <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <p className="text-xs font-medium text-secondary">Email</p>
-                <a
-                  href="mailto:hello@atelier.studio"
-                  className="mt-2 block text-xl font-semibold text-link hover:text-link-hover"
+                <label
+                  htmlFor="name"
+                  className="text-xs font-medium text-secondary"
                 >
-                  hello@atelier.studio
-                </a>
+                  Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  className={fieldClass}
+                />
               </div>
+
               <div>
-                <p className="text-xs font-medium text-secondary">Location</p>
-                <p className="mt-2 text-[15px] text-secondary">
-                  Remote collaboration and on-site production worldwide.
-                </p>
+                <label
+                  htmlFor="email"
+                  className="text-xs font-medium text-secondary"
+                >
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className={fieldClass}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="organization"
+                  className="text-xs font-medium text-secondary"
+                >
+                  Organization
+                </label>
+                <input
+                  id="organization"
+                  name="organization"
+                  type="text"
+                  placeholder="Studio, museum, gallery"
+                  className={`${fieldClass} placeholder:text-secondary/60`}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="type"
+                  className="text-xs font-medium text-secondary"
+                >
+                  Project type
+                </label>
+                <select id="type" name="type" className={fieldClass}>
+                  <option value="installation">Installation</option>
+                  <option value="website">Digital platform</option>
+                  <option value="app">Application</option>
+                  <option value="consulting">Consulting</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div className="md:col-span-2">
+                <label
+                  htmlFor="message"
+                  className="text-xs font-medium text-secondary"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={2}
+                  required
+                  placeholder="Project overview, timeline, and scope."
+                  className={`${fieldClass} resize-none placeholder:text-secondary/60`}
+                />
               </div>
             </div>
-          </Reveal>
 
-          <Reveal delay={0.08}>
-            <form
-              className="glass rounded-[18px] p-8 md:p-10"
-              action="mailto:hello@atelier.studio"
-              method="POST"
-              encType="text/plain"
+            <button
+              type="submit"
+              className="mt-4 w-full rounded-full bg-link py-2.5 text-[14px] font-medium text-white transition-colors hover:bg-link-hover"
             >
-              <div className="space-y-6">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="text-xs font-medium text-secondary"
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    className="mt-2 w-full border-b border-line bg-transparent py-2 text-[17px] text-foreground outline-none focus:border-foreground"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="text-xs font-medium text-secondary"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    className="mt-2 w-full border-b border-line bg-transparent py-2 text-[17px] text-foreground outline-none focus:border-foreground"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="organization"
-                    className="text-xs font-medium text-secondary"
-                  >
-                    Organization
-                  </label>
-                  <input
-                    id="organization"
-                    name="organization"
-                    type="text"
-                    placeholder="Studio, museum, gallery"
-                    className="mt-2 w-full border-b border-line bg-transparent py-2 text-[17px] text-foreground placeholder:text-secondary/60 outline-none focus:border-foreground"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="type"
-                    className="text-xs font-medium text-secondary"
-                  >
-                    Project type
-                  </label>
-                  <select
-                    id="type"
-                    name="type"
-                    className="mt-2 w-full border-b border-line bg-transparent py-2 text-[17px] text-foreground outline-none focus:border-foreground"
-                  >
-                    <option value="installation">Installation</option>
-                    <option value="website">Digital platform</option>
-                    <option value="app">Application</option>
-                    <option value="consulting">Consulting</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="text-xs font-medium text-secondary"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                    placeholder="Project overview, timeline, and scope."
-                    className="mt-2 w-full resize-none border-b border-line bg-transparent py-2 text-[17px] text-foreground placeholder:text-secondary/60 outline-none focus:border-foreground"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full rounded-full bg-link py-3 text-[15px] font-medium text-white transition-colors hover:bg-link-hover"
-                >
-                  Send
-                </button>
-              </div>
-            </form>
-          </Reveal>
-        </div>
-      </section>
+              Send
+            </button>
+          </form>
+        </Reveal>
+      </div>
     </div>
   );
 }

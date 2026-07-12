@@ -23,7 +23,7 @@ export function Header() {
           className="text-[21px] font-semibold tracking-tight text-foreground"
           onClick={() => setOpen(false)}
         >
-          Atelier
+          Gracielly Abreu
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

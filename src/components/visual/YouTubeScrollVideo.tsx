@@ -139,9 +139,9 @@ export function YouTubeScrollVideo({ url, onReady }: YouTubeScrollVideoProps) {
 
   if (!videoId || failed) {
     return (
-      <div className="hero-fallback flex h-full w-full items-center justify-center px-6 text-center text-sm text-white/60">
+      <div className="hero-fallback flex h-full w-full items-center justify-center px-6 text-center text-sm text-secondary">
         Add your YouTube link in{" "}
-        <code className="mx-1 text-white/80">src/data/media.ts</code>
+        <code className="mx-1 text-foreground">src/data/media.ts</code>
       </div>
     );
   }

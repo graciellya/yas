@@ -18,6 +18,9 @@ export type Project = {
   technologies: string[];
   accent: string;
   featured: boolean;
+  inGallery?: boolean;
+  galleryLogo?: string;
+  pdfSrc?: string;
 };
 
 export const categoryLabels: Record<ProjectCategory, string> = {
@@ -28,6 +31,77 @@ export const categoryLabels: Record<ProjectCategory, string> = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "soundspot-prd",
+    title: "SoundSpot",
+    subtitle: "Product requirements · tiered membership for indie artists",
+    category: "app",
+    year: "2025",
+    client: "Team project · 5 contributors",
+    description:
+      "End-to-end PRD for SoundSpot Backstage — a shipped-scope product defining membership tiers, artist profiles, fan engagement, and go-to-market for 1.5M users.",
+    context:
+      "Structured product documentation covering problem framing, personas, JTBD, feature prioritization, milestones, KPIs, and launch strategy.",
+    deliverables: [
+      "Product requirements document",
+      "User personas & jobs-to-be-done",
+      "Feature scope & prioritization",
+      "Go-to-market & success metrics",
+    ],
+    technologies: ["Product strategy", "UX research", "Figma", "Jira"],
+    accent: "#E54B35",
+    featured: true,
+    inGallery: true,
+    galleryLogo: "/work/soundspot/gallery-logo.png",
+    pdfSrc: "/work/soundspot-prd.pdf",
+  },
+  {
+    slug: "tuneties",
+    title: "TuneTies",
+    subtitle: "Live music discovery · research to React Native prototype",
+    category: "app",
+    year: "2023",
+    client: "Stanford CS147 · Team project",
+    description:
+      "End-to-end product design for a community-driven live music app — needfinding, experience prototypes, lo-fi to med-fi UI, and hi-fi React Native build.",
+    context:
+      "CS147 final deliverable covering interviews, POVs, task flows, usability testing, heuristic evaluation, and shipped interactive prototype.",
+    deliverables: [
+      "Needfinding report & empathy maps",
+      "Med-fi Figma prototype",
+      "Hi-fi React Native app",
+      "Heuristic evaluation & revisions",
+    ],
+    technologies: ["Figma", "React Native", "Expo", "User research"],
+    accent: "#3D6B4F",
+    featured: true,
+    inGallery: true,
+    galleryLogo: "/work/tuneties/gallery-logo.png",
+    pdfSrc: "/work/tuneties/tuneties-report.pdf",
+  },
+  {
+    slug: "reson8",
+    title: "Reson8",
+    subtitle: "Algorithmic playlists · share with friends",
+    category: "app",
+    year: "2025",
+    client: "Personal project",
+    description:
+      "Mobile app that generates personalized playlists from taste preferences and Spotify data — genres, region, cultural style — with social sharing built in.",
+    context:
+      "Shipped prototype covering profile setup, algorithmic playlist creation, library views, and friends tab for sharing mixes.",
+    deliverables: [
+      "Product concept & feature scope",
+      "Mobile UI prototype",
+      "Playlist generation flow",
+      "Demo video",
+    ],
+    technologies: ["React Native", "Expo", "Spotify API", "Figma"],
+    accent: "#8B2252",
+    featured: true,
+    inGallery: true,
+    galleryLogo: "/work/reson8/logo.svg",
+  },
   {
     slug: "liminal-threshold",
     title: "Liminal Threshold",
@@ -49,6 +123,7 @@ export const projects: Project[] = [
     technologies: ["TouchDesigner", "Arduino", "Dante Audio", "Custom PCB"],
     accent: "#C4A882",
     featured: true,
+    inGallery: false,
   },
   {
     slug: "archive-of-motion",
@@ -70,6 +145,7 @@ export const projects: Project[] = [
     technologies: ["Next.js", "Sanity CMS", "Mux", "Vercel"],
     accent: "#7A8B7E",
     featured: true,
+    inGallery: false,
   },
   {
     slug: "residency-journal",
@@ -91,6 +167,7 @@ export const projects: Project[] = [
     technologies: ["React Native", "SQLite", "Expo", "Cloudflare R2"],
     accent: "#8B6E7A",
     featured: true,
+    inGallery: false,
   },
   {
     slug: "echo-chamber",
@@ -113,6 +190,7 @@ export const projects: Project[] = [
     technologies: ["Max/MSP", "Raspberry Pi", "Custom microphones", "Weatherproof enclosures"],
     accent: "#6E7A8B",
     featured: false,
+    inGallery: false,
   },
   {
     slug: "studio-index",
@@ -134,6 +212,7 @@ export const projects: Project[] = [
     technologies: ["Next.js", "Tailwind CSS", "Resend", "Plausible"],
     accent: "#A8927A",
     featured: false,
+    inGallery: false,
   },
   {
     slug: "wayfinding-system",
@@ -155,6 +234,7 @@ export const projects: Project[] = [
     technologies: ["Next.js PWA", "Mapbox", "Headless CMS", "Service Workers"],
     accent: "#7A868B",
     featured: false,
+    inGallery: false,
   },
 ];
 
@@ -164,6 +244,10 @@ export function getProject(slug: string): Project | undefined {
 
 export function getFeaturedProjects(): Project[] {
   return projects.filter((p) => p.featured);
+}
+
+export function getGalleryProjects(): Project[] {
+  return projects.filter((p) => p.inGallery);
 }
 
 export function getProjectsByCategory(category: ProjectCategory): Project[] {

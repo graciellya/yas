@@ -8,13 +8,13 @@ import { getProjectsByCategory } from "@/data/projects";
 export const metadata: Metadata = {
   title: "Practice",
   description:
-    "How Atelier approaches installations, digital platforms, and applications for the cultural sector.",
+    "How I approach installations, digital platforms, and applications for the cultural sector.",
 };
 
 const approach = [
   {
     title: "Listen first",
-    text: "We begin by understanding artistic intent, institutional constraints, and how audiences encounter the work.",
+    text: "I begin by understanding artistic intent, institutional constraints, and how audiences encounter the work.",
   },
   {
     title: "Design with restraint",
@@ -22,7 +22,7 @@ const approach = [
   },
   {
     title: "Build for longevity",
-    text: "Exhibitions close. Archives remain. We document systems and choose stacks institutions can maintain.",
+    text: "Exhibitions close. Archives remain. I document systems and choose stacks institutions can maintain.",
   },
   {
     title: "Stay through opening",
@@ -90,7 +90,7 @@ export default function PracticePage() {
         <div className="container-wide">
           <Reveal>
             <h2 className="text-center text-3xl font-semibold tracking-tight md:text-[32px]">
-              How we work
+              How I work
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 md:grid-cols-2">

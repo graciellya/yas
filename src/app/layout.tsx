@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Footer } from "@/components/layout/Footer";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import { SiteBackground } from "@/components/layout/SiteBackground";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,15 +11,23 @@ const inter = Inter({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  display: "swap",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "Atelier — Design & Creative Technology",
-    template: "%s · Atelier",
+    default: "Gracielly Abreu — Design & Creative Technology",
+    template: "%s · Gracielly Abreu",
   },
   description:
     "Design and creative technology for contemporary artists, museums, and cultural institutions.",
   openGraph: {
-    title: "Atelier — Design & Creative Technology",
+    title: "Gracielly Abreu — Design & Creative Technology",
     description:
       "Installations, digital platforms, and applications for contemporary culture.",
     type: "website",
@@ -32,11 +40,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable} h-full`}>
       <body className="relative min-h-full flex flex-col font-sans antialiased">
         <SiteBackground />
         <main className="relative z-[1] flex-1">{children}</main>
-        <Footer />
+        <SiteFooter />
       </body>
     </html>
   );

@@ -16,7 +16,7 @@ export function MinimalHomeLink({ className }: MinimalHomeLinkProps) {
         className,
       )}
     >
-      Atelier
+      Gracielly Abreu
     </Link>
   );
 }

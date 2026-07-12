@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MinimalHomeLink } from "@/components/layout/MinimalHomeLink";
+import { OtherWorksBackLink } from "@/components/layout/OtherWorksBackLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { CaseStudyView } from "@/components/work/CaseStudyView";
+import { getCaseStudy } from "@/data/case-studies";
 import { categoryLabels, getProject, projects } from "@/data/projects";
 
 type PageProps = {
@@ -19,22 +22,53 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getProject(slug);
+  const caseStudy = getCaseStudy(slug);
   if (!project) return { title: "Project not found" };
 
   return {
-    title: project.title,
-    description: project.description,
+    title: caseStudy?.productName ?? project.title,
+    description: caseStudy?.tagline ?? project.description,
   };
+}
+
+function getNextProject(slug: string) {
+  const galleryProjects = projects.filter((p) => p.inGallery);
+  const galleryIndex = galleryProjects.findIndex((p) => p.slug === slug);
+  if (galleryIndex >= 0) {
+    return galleryProjects[(galleryIndex + 1) % galleryProjects.length];
+  }
+  const index = projects.findIndex((p) => p.slug === slug);
+  return projects[(index + 1) % projects.length];
 }
 
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
   const project = getProject(slug);
+  const caseStudy = getCaseStudy(slug);
 
   if (!project) notFound();
 
-  const currentIndex = projects.findIndex((p) => p.slug === slug);
-  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const nextProject = getNextProject(slug);
+
+  if (caseStudy) {
+    return (
+      <article className="min-h-screen">
+        <div className="px-6 pt-8 md:px-12 lg:px-20">
+          <OtherWorksBackLink />
+        </div>
+        <CaseStudyView study={caseStudy} />
+        <nav className="container-wide border-t border-line py-12 text-center">
+          <p className="text-xs text-secondary">Next project</p>
+          <Link
+            href={`/work/${nextProject.slug}`}
+            className="mt-2 inline-block text-xl font-semibold text-link hover:text-link-hover"
+          >
+            {nextProject.title} <span aria-hidden="true">›</span>
+          </Link>
+        </nav>
+      </article>
+    );
+  }
 
   return (
     <article className="min-h-screen">
@@ -43,10 +77,7 @@ export default async function ProjectPage({ params }: PageProps) {
       </div>
       <section className="section-pad pb-12 pt-6 text-center">
         <Reveal>
-          <Link
-            href="/work"
-            className="text-sm text-link hover:text-link-hover"
-          >
+          <Link href="/#gallery" className="text-sm text-link hover:text-link-hover">
             Work
           </Link>
           <p className="mt-6 text-xs font-medium text-secondary">
@@ -85,7 +116,6 @@ export default async function ProjectPage({ params }: PageProps) {
                 {project.description}
               </p>
             </Reveal>
-
             <Reveal delay={0.08}>
               <SectionLabel>Context</SectionLabel>
               <p className="mt-3 text-[17px] leading-relaxed text-secondary">
@@ -93,7 +123,6 @@ export default async function ProjectPage({ params }: PageProps) {
               </p>
             </Reveal>
           </div>
-
           <aside className="space-y-10">
             <Reveal delay={0.08}>
               <SectionLabel>Deliverables</SectionLabel>
@@ -108,7 +137,6 @@ export default async function ProjectPage({ params }: PageProps) {
                 ))}
               </ul>
             </Reveal>
-
             <Reveal delay={0.12}>
               <SectionLabel>Technologies</SectionLabel>
               <ul className="mt-3 flex flex-wrap gap-2">
@@ -124,7 +152,6 @@ export default async function ProjectPage({ params }: PageProps) {
             </Reveal>
           </aside>
         </div>
-
         <Reveal delay={0.15}>
           <nav className="container-wide mt-20 border-t border-line pt-10 text-center">
             <p className="text-xs text-secondary">Next project</p>
