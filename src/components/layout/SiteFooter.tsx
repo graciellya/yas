@@ -124,7 +124,7 @@ export function SiteFooter() {
               alt="Gracielly Abreu"
               fill
               unoptimized
-              className="scale-[1.55] object-cover object-[center_14%]"
+              className="object-cover object-center"
               sizes="(max-width: 768px) 224px, 288px"
             />
           </div>

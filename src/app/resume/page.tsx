@@ -92,7 +92,7 @@ export default function ResumePage() {
                   alt={resumeProfile.name}
                   fill
                   unoptimized
-                  className="scale-125 object-cover object-[center_18%]"
+                  className="object-cover object-center"
                   sizes="200px"
                   priority
                 />

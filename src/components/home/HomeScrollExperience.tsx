@@ -505,29 +505,36 @@ export function HomeScrollExperience() {
               </p>
             </div>
 
-            <div className="flex flex-1 flex-col justify-end pb-12 md:pb-14">
-              <h1 className="flex w-fit flex-col font-black uppercase tracking-[-0.045em] text-white">
-                <span className="block overflow-hidden text-[clamp(3.5rem,13vw,9rem)] leading-[0.86]">
-                  <span
-                    ref={(el) => {
-                      wordRefs.current[0] = el;
-                    }}
-                    className="inline-block will-change-transform"
-                  >
-                    {headline[0]}
-                  </span>
-                </span>
-                <span className="-mt-1 block self-end overflow-hidden text-[clamp(1.75rem,5.5vw,3.75rem)] leading-none md:-mt-2">
-                  <span
-                    ref={(el) => {
-                      wordRefs.current[1] = el;
-                    }}
-                    className="inline-block font-display font-normal normal-case italic tracking-[0.04em] will-change-transform"
-                  >
-                    {headline[1]}
-                  </span>
-                </span>
-              </h1>
+            <div className="flex flex-1 flex-col justify-end pb-2 md:pb-3">
+              <div className="w-fit max-w-full">
+                <div className="inline-grid w-full grid-cols-1 font-black uppercase tracking-[-0.045em] text-white">
+                  <h1 className="contents">
+                    <span className="col-start-1 row-start-1 block overflow-hidden text-[clamp(3.5rem,13vw,9rem)] leading-[0.86]">
+                      <span
+                        ref={(el) => {
+                          wordRefs.current[0] = el;
+                        }}
+                        className="inline-block will-change-transform"
+                      >
+                        {headline[0]}
+                      </span>
+                    </span>
+                    <span className="col-start-1 row-start-2 -mt-1 mr-1 justify-self-end overflow-hidden font-display text-[clamp(1.75rem,5.5vw,3.75rem)] font-normal italic leading-none normal-case md:-mt-2">
+                      <span
+                        ref={(el) => {
+                          wordRefs.current[1] = el;
+                        }}
+                        className="inline-block tracking-[0.04em] will-change-transform"
+                      >
+                        {headline[1]}
+                      </span>
+                    </span>
+                  </h1>
+                </div>
+                <p className="-mt-2.5 block w-max min-w-full pl-4 text-left whitespace-nowrap font-display text-[clamp(0.875rem,2.1vw,1.125rem)] font-normal normal-case italic leading-none tracking-normal text-white/60 md:-mt-3">
+                  I design digital experiences at the intersection of technology, culture, and art.
+                </p>
+              </div>
             </div>
           </div>
 
