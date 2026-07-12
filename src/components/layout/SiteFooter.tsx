@@ -50,6 +50,21 @@ function ResumeIcon({ className }: { className?: string }) {
   );
 }
 
+function ContactIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      aria-hidden
+      className={className}
+    >
+      <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
+    </svg>
+  );
+}
+
 type FooterLinkProps = {
   href: string;
   label: string;
@@ -58,24 +73,24 @@ type FooterLinkProps = {
 };
 
 function FooterLink({ href, label, icon: Icon, external }: FooterLinkProps) {
-  const row = (
+  const content = (
     <>
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line bg-surface/70 backdrop-blur-sm">
-        <Icon className="h-5 w-5 text-foreground" />
+      <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-line bg-background/60 transition-colors group-hover:bg-background/80 md:h-16 md:w-16">
+        <Icon className="h-6 w-6 text-foreground md:h-7 md:w-7" />
       </span>
-      <span className="min-w-0 text-left text-[clamp(1rem,2.4vw,1.35rem)] font-medium leading-snug tracking-tight text-foreground">
+      <span className="w-[5.5rem] text-center text-[15px] font-medium leading-snug tracking-tight text-foreground md:text-[17px]">
         {label}
       </span>
     </>
   );
 
   const className =
-    "group grid w-full grid-cols-[2.75rem_1fr] items-center gap-x-4 rounded-2xl px-3 py-2.5 transition-colors hover:bg-surface/45 md:grid-cols-[2.75rem_minmax(0,20rem)] md:gap-x-5 md:px-4";
+    "group inline-flex w-[5.5rem] flex-col items-center gap-3 rounded-xl py-1 transition-opacity hover:opacity-70 md:gap-3.5";
 
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
-        {row}
+        {content}
       </a>
     );
   }
@@ -83,46 +98,47 @@ function FooterLink({ href, label, icon: Icon, external }: FooterLinkProps) {
   if (href.startsWith("/")) {
     return (
       <Link href={href} className={className}>
-        {row}
+        {content}
       </Link>
     );
   }
 
   return (
     <a href={href} className={className}>
-      {row}
+      {content}
     </a>
   );
 }
 
 export function SiteFooter() {
   const pathname = usePathname();
-  if (pathname === "/resume") return null;
+  if (pathname === "/resume" || pathname === "/contact") return null;
 
   return (
-    <footer className="relative z-[1] min-h-[75vh] border-t border-line">
-      <div className="flex min-h-[75vh] items-center justify-center px-6 py-16 md:px-12 lg:px-20">
-        <div className="flex flex-col items-center gap-10 md:flex-row md:items-center md:gap-14 lg:gap-16">
-          <div className="relative h-52 w-52 shrink-0 overflow-hidden rounded-full md:h-60 md:w-60 lg:h-64 lg:w-64">
+    <footer className="relative z-[1] w-full border-t border-line bg-surface/55 backdrop-blur-xl">
+      <div className="mx-auto max-w-[1200px] px-6 py-10 md:px-12 md:py-12 lg:px-20">
+        <div className="flex flex-col items-center gap-10 sm:flex-row sm:items-center">
+          <div className="relative h-56 w-56 shrink-0 overflow-hidden rounded-full sm:h-64 sm:w-64 md:h-72 md:w-72">
             <Image
               src={siteContact.photo}
               alt="Gracielly Abreu"
               fill
               unoptimized
-              className="scale-125 object-cover object-[center_18%]"
-              sizes="(max-width: 768px) 208px, 256px"
+              className="scale-[1.55] object-cover object-[center_14%]"
+              sizes="(max-width: 768px) 224px, 288px"
             />
           </div>
 
-          <div className="glass w-full max-w-sm rounded-[1.75rem] px-5 py-6 md:max-w-md md:px-7 md:py-8">
-            <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.28em] text-secondary">
-              Contact
+          <div className="ml-0 flex flex-col items-center gap-4 sm:ml-auto sm:items-start">
+            <p className="text-left text-[11px] font-medium uppercase tracking-[0.28em] text-secondary">
+              Let&apos;s connect
             </p>
-            <p className="font-display text-2xl font-medium tracking-tight text-foreground md:text-[1.75rem]">
-              Gracielly Abreu
-            </p>
-
-            <div className="mt-6 flex flex-col gap-1">
+            <div className="flex flex-wrap items-center justify-center gap-8 sm:justify-end sm:gap-10 md:gap-12 lg:gap-14">
+              <FooterLink
+                href={siteContact.contactHref}
+                label="Contact"
+                icon={ContactIcon}
+              />
               <FooterLink
                 href={siteContact.linkedIn}
                 label="LinkedIn"
@@ -131,7 +147,7 @@ export function SiteFooter() {
               />
               <FooterLink
                 href={`mailto:${siteContact.email}`}
-                label={siteContact.email}
+                label="Email"
                 icon={MailIcon}
               />
               <FooterLink

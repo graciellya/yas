@@ -499,16 +499,10 @@ export function HomeScrollExperience() {
             ref={heroRef}
             className="relative z-10 flex h-full flex-col justify-between px-8 py-9 md:px-14 md:py-11 lg:px-[4.5rem]"
           >
-            <div className="flex items-start justify-between">
+            <div className="flex items-start">
               <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/55">
                 Selected works
               </p>
-              <Link
-                href="/contact"
-                className="text-[11px] font-medium uppercase tracking-[0.25em] text-white/70 transition-colors hover:text-white"
-              >
-                Contact
-              </Link>
             </div>
 
             <div className="flex flex-1 flex-col justify-end pb-12 md:pb-14">
